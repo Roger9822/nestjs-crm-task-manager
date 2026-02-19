@@ -11,10 +11,11 @@ export class AuthService {
         private jwtService: JwtService,
     ) { }
 
-    async register(email: string, password: string, role: Role = Role.User) {
+    async register(name: string, email: string, password: string, role: Role = Role.User) {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = await this.usersService.create({
+            name,
             email,
             password: hashedPassword,
             role,

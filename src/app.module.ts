@@ -3,9 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import dataSource from './config/typeorm.config';
+import { dataSource } from './config/typeorm.config';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
+import { TasksModule } from './modules/tasks/tasks.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -13,7 +14,8 @@ import { UsersModule } from './modules/users/users.module';
     }),
   TypeOrmModule.forRoot(dataSource.options),
   AuthModule,
-  UsersModule
+  UsersModule,
+  TasksModule
   ],
   controllers: [AppController],
   providers: [AppService],
