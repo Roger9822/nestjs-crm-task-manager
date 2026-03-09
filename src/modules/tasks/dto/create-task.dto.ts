@@ -16,4 +16,6 @@ export class CreateTaskDto {
     dueDate?: Date;
 
     assignedToId: number;
+
+    customerId: number;
 }

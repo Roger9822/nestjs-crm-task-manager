@@ -17,9 +17,10 @@ import { RolesGuard } from 'src/common/guards/roles.guard';
 export class UsersController {
     constructor(private usersService: UsersService) { }
 
-    @Roles(Role.Admin)
     @Get()
+    @Roles(Role.Admin)
     findAll() {
+        console.log("here")
         return this.usersService.findAll();
     }
 

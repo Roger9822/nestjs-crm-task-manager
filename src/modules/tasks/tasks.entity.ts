@@ -6,6 +6,7 @@ import {
     JoinColumn,
 } from 'typeorm';
 import { User } from '../users/users.entity';
+import { Customer } from '../customers/customers.entity';
 
 export enum TaskStatus {
     Todo = 'todo',
@@ -33,6 +34,10 @@ export class Task {
 
     @Column({ type: 'datetime', nullable: true })
     dueDate: Date;
+
+    @ManyToOne(() => Customer, (customer) => customer.tasks, { eager: true })
+    @JoinColumn({ name: 'customerId' })
+    customer: Customer;
 
     @ManyToOne(() => User, { eager: true })
     @JoinColumn({ name: 'assignedToId' })

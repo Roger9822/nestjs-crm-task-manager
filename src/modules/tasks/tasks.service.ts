@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Task, TaskStatus } from './tasks.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { User } from '../users/users.entity';
 import { Role } from 'src/common/enums/role.enum';
+import { Customer } from '../customers/customers.entity';
 
 @Injectable()
 export class TasksService {
@@ -13,6 +14,8 @@ export class TasksService {
     private repo: Repository<Task>,
     @InjectRepository(User)
     private userRepo: Repository<User>,
+    @InjectRepository(Customer)
+    private customerRepo: Repository<Customer>,
   ) {}
 
 async create(dto: CreateTaskDto) {
@@ -20,9 +23,13 @@ async create(dto: CreateTaskDto) {
     where: { id: dto.assignedToId },
   });
 
-  if (!user) {
-    throw new Error('Assigned user not found');
-  }
+  if (!user) throw new NotFoundException('User not found');
+
+  const customer = await this.customerRepo.findOne({
+    where: { id: dto.customerId },
+  });
+
+  if (!customer) throw new NotFoundException('Customer not found');
 
   const task = this.repo.create({
     title: dto.title,
@@ -30,6 +37,7 @@ async create(dto: CreateTaskDto) {
     status: dto.status,
     dueDate: dto.dueDate,
     assignedTo: user,
+    customer: customer,
   });
 
   return this.repo.save(task);
@@ -38,9 +46,9 @@ async create(dto: CreateTaskDto) {
 
   async findAll(user: any, filters: any) {
     const query = this.repo.createQueryBuilder('task')
-      .leftJoinAndSelect('task.assignedTo', 'user');
+      .leftJoinAndSelect('task.assignedTo', 'user')
+      .leftJoinAndSelect('task.customer', 'customer');
 
-    // If normal user → only see own tasks
     if (user.role === Role.User) {
       query.andWhere('user.id = :id', { id: user.userId });
     }
@@ -57,6 +65,11 @@ async create(dto: CreateTaskDto) {
       });
     }
 
+    if (filters.customerId) {
+    query.andWhere('customer.id = :customerId', {
+      customerId: filters.customerId,
+    });
+  }
     return query.getMany();
   }
 
