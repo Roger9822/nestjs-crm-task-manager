@@ -20,7 +20,6 @@ export class UsersController {
     @Get()
     @Roles(Role.Admin)
     findAll() {
-        console.log("here")
         return this.usersService.findAll();
     }
 
