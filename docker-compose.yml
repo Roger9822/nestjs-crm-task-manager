@@ -1,0 +1,21 @@
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: crm_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: crm_project
+    ports:
+      - "3307:3306"
+
+  api:
+    build: .
+    container_name: crm_api
+    depends_on:
+      - mysql
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
