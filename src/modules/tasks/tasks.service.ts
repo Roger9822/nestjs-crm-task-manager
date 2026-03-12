@@ -16,32 +16,32 @@ export class TasksService {
     private userRepo: Repository<User>,
     @InjectRepository(Customer)
     private customerRepo: Repository<Customer>,
-  ) {}
+  ) { }
 
-async create(dto: CreateTaskDto) {
-  const user = await this.userRepo.findOne({
-    where: { id: dto.assignedToId },
-  });
+  async create(dto: CreateTaskDto) {
+    const user = await this.userRepo.findOne({
+      where: { id: dto.assignedToId },
+    });
 
-  if (!user) throw new NotFoundException('User not found');
+    if (!user) throw new NotFoundException('User not found');
 
-  const customer = await this.customerRepo.findOne({
-    where: { id: dto.customerId },
-  });
+    const customer = await this.customerRepo.findOne({
+      where: { id: dto.customerId },
+    });
 
-  if (!customer) throw new NotFoundException('Customer not found');
+    if (!customer) throw new NotFoundException('Customer not found');
 
-  const task = this.repo.create({
-    title: dto.title,
-    description: dto.description,
-    status: dto.status,
-    dueDate: dto.dueDate,
-    assignedTo: user,
-    customer: customer,
-  });
+    const task = this.repo.create({
+      title: dto.title,
+      description: dto.description,
+      status: dto.status,
+      dueDate: dto.dueDate,
+      assignedTo: user,
+      customer: customer,
+    });
 
-  return this.repo.save(task);
-}
+    return this.repo.save(task);
+  }
 
 
   async findAll(user: any, filters: any) {
@@ -66,10 +66,10 @@ async create(dto: CreateTaskDto) {
     }
 
     if (filters.customerId) {
-    query.andWhere('customer.id = :customerId', {
-      customerId: filters.customerId,
-    });
-  }
+      query.andWhere('customer.id = :customerId', {
+        customerId: filters.customerId,
+      });
+    }
     return query.getMany();
   }
 
