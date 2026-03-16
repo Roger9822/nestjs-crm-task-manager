@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Task, TaskStatus } from './tasks.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { User } from '../users/users.entity';
-import { Role } from 'src/common/enums/role.enum';
+import { Role } from '../../common/enums/role.enum';
 import { Customer } from '../customers/customers.entity';
 
 @Injectable()
