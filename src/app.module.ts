@@ -7,6 +7,7 @@ import { dataSource } from './config/typeorm.config';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { TasksModule } from './modules/tasks/tasks.module';
+import { CustomersModule } from './modules/customers/customers.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -15,7 +16,8 @@ import { TasksModule } from './modules/tasks/tasks.module';
   TypeOrmModule.forRoot(dataSource.options),
   AuthModule,
   UsersModule,
-  TasksModule
+  TasksModule,
+  CustomersModule
   ],
   controllers: [AppController],
   providers: [AppService],
