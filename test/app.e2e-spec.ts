@@ -21,7 +21,7 @@ describe('CRM API (e2e)', () => {
     const res = await request(app.getHttpServer())
       .post('/auth/login')
       .send({
-        email: 'admin@gmail.com',
+        email: 'admin1@gmail.com',
         password: '123456',
       });
 

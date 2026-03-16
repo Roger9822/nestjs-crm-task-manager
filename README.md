@@ -57,6 +57,7 @@ README.md
 
 
 # Docker SETUP
+# docker compose build --no-cache
 # Run Project with Docker
 # docker compose up --build
 
