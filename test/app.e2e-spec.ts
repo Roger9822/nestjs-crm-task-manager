@@ -16,7 +16,6 @@ describe('CRM API (e2e)', () => {
     await app.init();
   });
 
-  // 1️⃣ Login Test
   it('POST /auth/login should return token', async () => {
     const res = await request(app.getHttpServer())
       .post('/auth/login')
@@ -31,7 +30,6 @@ describe('CRM API (e2e)', () => {
     token = res.body.access_token;
   });
 
-  // 2️⃣ Create Task
   it('POST /tasks should create task', async () => {
     const res = await request(app.getHttpServer())
       .post('/tasks')
@@ -48,7 +46,6 @@ describe('CRM API (e2e)', () => {
     expect(res.body).toHaveProperty('id');
   });
 
-  // 3️⃣ Get Tasks
   it('GET /tasks should return tasks', async () => {
     const res = await request(app.getHttpServer())
       .get('/tasks')
