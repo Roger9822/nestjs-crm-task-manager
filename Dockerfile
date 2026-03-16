@@ -20,4 +20,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Start application
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/main.js","npm", "run", "start:dev"]

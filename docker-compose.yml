@@ -1,5 +1,4 @@
 services:
-
   mysql:
     image: mysql:8
     container_name: crm_mysql
@@ -19,3 +18,9 @@ services:
       - "3000:3000"
     env_file:
       - .env
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+    volumes:
+      - .:/app
+      - /app/node_modules
