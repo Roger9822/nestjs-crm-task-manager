@@ -37,7 +37,7 @@ A CRM-style Task Manager backend built with **NestJS**, **TypeORM**, **MySQL**, 
 
 ## Project Structure
 
-```bash
+
 src/
 ├── common/
 ├── config/
@@ -57,48 +57,89 @@ README.md
 
 
 # Docker SETUP
-# docker compose build --no-cache
-# Run Project with Docker
-# docker compose up --build
 
-# Run Migrations in Docker
-# docker exec -it crm_api npm run migration:run
+---
 
-# Enter Mysql of Docker 
-# docker exec -it crm_mysql mysql -u root -p
-# password 12345      THEN    SHOW DATABASES;
+## ⚙️ Commands Section (better structured)
 
-# Run Unit Test
-# npm run test
-# npm run test:e2e
+
+## ⚙️ Setup & Commands
+
+### 🐳 Docker
+docker exec -it crm_api npm run migration:run
+docker compose build --no-cache
+docker compose up --build
 
 
 
-# API Endpoints
-# Auth APIs
-# POST /auth/register
-# POST /auth/login
 
-# User APIs
-# GET /users
-# GET /users/:id
-# PUT /users/:id
-# DELETE /users/:id
+## 🌐 API Endpoints 
 
-# Task APIs
-# POST /tasks
-# GET /tasks
-# GET /tasks/:id
-# PUT /tasks/:id
-# DELETE /tasks/:id
-# Task Filter APIs
-# GET /tasks?status=done
-# GET /tasks?title=meeting
-# GET /tasks?customerId=1
+### 🔐 Auth
+- POST /auth/register
+- POST /auth/login
 
-# Customer APIs
-# POST /customers
-# GET /customers
-# GET /customers/:id
-# PUT /customers/:id
-# DELETE /customers/:id
+### 👤 Users
+- GET /users
+- GET /users/:id
+- PUT /users/:id
+- DELETE /users/:id
+
+### 📋 Tasks
+- POST /tasks
+- GET /tasks
+- GET /tasks/:id
+- PUT /tasks/:id
+- DELETE /tasks/:id
+
+#### Filters
+- GET /tasks?status=done
+- GET /tasks?title=meeting
+- GET /tasks?customerId=1
+
+### 👥 Customers
+- POST /customers
+- GET /customers
+- GET /customers/:id
+- PUT /customers/:id
+- DELETE /customers/:id
+
+
+## 📸 Project Demonstration (Docker + API Flow)
+
+### 🔐 Login Flow
+<img src="./src/outputs/Login_Flow.png" width="700"/>
+
+
+## 📸 Project Demonstration (Docker + API Flow)
+
+### 🔐 Login Flow
+<img src="./src/outputs/Login_Flow.png" width="700"/>
+
+### 📝 User Registration
+<img src="./src/outputs/Resgistration.png" width="700"/>
+
+### 👥 Customer Creation
+<img src="./src/outputs/Customer_Creation.png" width="700"/>
+
+### ✅ Create Task (Authorized)
+<img src="./src/outputs/Create_Tasks.png" width="700"/>
+
+### ❌ Create Task (Unauthorized)
+<img src="./src/outputs/Task_CreateUnauthorized.png" width="700"/>
+
+---
+
+## 🐳 Docker Setup & Execution
+
+### 📦 Docker Desktop Running
+<img src="./src/outputs/Docker_Desktop.png" width="700"/>
+
+### 🗄️ Users Table (Docker DB)
+<img src="./src/outputs/Docker_UsersTable.png" width="700"/>
+
+### 🧪 E2E Test Execution (Docker)
+<img src="./src/outputs/E2E_TestDocker.png" width="700"/>
+
+### ▶️ Test Run Output
+<img src="./src/outputs/TestRun_on_Docker.png" width="700"/>
